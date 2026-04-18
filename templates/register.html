@@ -5,10 +5,10 @@
     <div class="card">
         <div class="card-header text-center"><h3 class="card-title">GradePace | Sign Up</h3> </div>
         <div class="card-body">
-            <form class="specific-w-400 mw-100 p-20 m-auto needs-validation" novalidate>
+            <form class="specific-w-400 mw-100 p-20 m-auto needs-validation" novalidate method="post" action="/register">
                 <div class="input-group has-validation mb-3">
                     <span class="input-group-text"><i class="iconoir-user"></i></span>
-                    <input type="text" class="form-control form-control-lg" id="name" required placeholder="Name" aria-label="Name">
+                    <input type="text" class="form-control form-control-lg" id="name" required placeholder="Name" aria-label="Name" name="name">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="input-group has-validation mb-3">
                     <span class="input-group-text"><i class="iconoir-mail"></i></span>
-                    <input type="email" class="form-control form-control-lg" id="email" required placeholder="Email address" aria-label="Email address">
+                    <input type="email" class="form-control form-control-lg" id="email" required placeholder="Email address" aria-label="Email address" name="username">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="input-group has-validation mb-3">
                     <span class="input-group-text"><i class="iconoir-lock"></i></span>
-                    <input type="password" class="form-control form-control-lg" id="password" required placeholder="Password" aria-label="Password" oninput="checkPassword()">
+                    <input type="password" class="form-control form-control-lg" id="password" required placeholder="Password" aria-label="Password" oninput="checkPassword()" name="password">
                     <button type="button" class="btn btn-light btn-lg" onclick="togglePasswordVisibility()"><i class="iconoir-eye-closed" id="eye-icon"></i></button>
                     <div class="valid-feedback">
                         Looks good!
@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center border-bottom mb-3 pb-3">
-                    <button type="submit" class="btn btn-primary ms-auto btn-lg">Sign in</button>
+                    <button type="submit" class="btn btn-primary ms-auto btn-lg">Sign Up</button>
                 </div>
                 <div class="text-center text-body-secondary">
                     Already have an account? <a href="./login">Login</a>

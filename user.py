@@ -12,7 +12,12 @@ def get_user(user_id: str):
 
 
 def validate_user(email: str, password: str):
-    return True
+    user = database["Users"].find_one({"email": email})
+    encrypted_password = encrypt_password(password=password, salt_raw=user["salt"])
+    if encrypted_password == user["password"]:
+        return User(userID=user["userID"], name=user["name"], email=user["email"], start_of_week=user["start_of_week"], salt=user["salt"], password=user["password"])
+    else:
+        return None
 
 
 def encrypt_password(password: str, salt_raw: str):
@@ -37,6 +42,7 @@ def create_user(name: str, email: str, password: str):
         email=email
     )
     database["Users"].insert_one(user.model_dump())
+    return user
 
 
 
