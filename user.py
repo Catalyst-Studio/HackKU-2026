@@ -8,7 +8,8 @@ from pydantic import BaseModel
 
 
 def get_user(user_id: str):
-    return User()
+    user = database["Users"].find_one({"userID": user_id})
+    return User(userID=user["userID"], name=user["name"], email=user["email"], start_of_week=user["start_of_week"], salt=user["salt"], password=user["password"])
 
 
 def validate_user(email: str, password: str):

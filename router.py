@@ -39,7 +39,7 @@ def create_router(manager: LoginManager):
         access_token = manager.create_access_token(
             data={"sub": new_user.userID}
         )
-        resp = RedirectResponse("/home")
+        resp = RedirectResponse("/home", status_code=303)
         resp.set_cookie(key=manager.cookie_name, value=access_token, httponly=True, path='/',
                         max_age=(365 * 24 * 60 * 60))
         return resp
@@ -64,7 +64,7 @@ def create_router(manager: LoginManager):
             access_token = manager.create_access_token(
                 data={"sub": validated_user.userID}
             )
-            resp = RedirectResponse("/home")
+            resp = RedirectResponse("/home", status_code=303)
             resp.set_cookie(key=manager.cookie_name, value=access_token, httponly=True, path='/',
                             max_age=(365 * 24 * 60 * 60))
             return resp
