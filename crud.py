@@ -4,6 +4,7 @@ from os import getenv
 
 uri = f"mongodb+srv://{getenv('mongodb_username')}:{getenv('mongodb_password')}@{getenv('mongodb_uri')}"
 client = MongoClient(uri, server_api=ServerApi('1'))
+database = client["GradePace"]
 
 
 try:
