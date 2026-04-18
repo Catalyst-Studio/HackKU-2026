@@ -6,6 +6,12 @@
         <div class="card-header text-center"><h3 class="card-title">GradePace | Login</h3> </div>
         <div class="card-body">
             <form class="specific-w-400 mw-100 p-20 m-auto needs-validation" novalidate method="post" action="/login">
+                {% for message in get_flashed_messages(request) %}
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Incorrect</h4>
+                        {{ message.message }}
+                    </div>
+                {% endfor %}
                 <div class="input-group has-validation mb-3">
                     <span class="input-group-text"><i class="iconoir-mail"></i></span>
                     <input type="email" class="form-control form-control-lg" id="email" required placeholder="Email address" aria-label="Email address" name="username">

@@ -1,18 +1,20 @@
 from typing import Annotated
-
+from flash import flash
 from fastapi import APIRouter, Request, Depends, Form
 from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.templating import Jinja2Templates
 from fastapi_login import LoginManager
-from fastapi_login.exceptions import InvalidCredentialsException
 
 import user
+from exceptions import NotAuthenticatedException
+from flash import get_flashed_messages
 
 
 def create_router(manager: LoginManager):
     router = APIRouter()
     templates = Jinja2Templates(directory="templates")
+    templates.env.globals['get_flashed_messages'] = get_flashed_messages
 
     @router.get("/")
     async def base(request: Request):
@@ -52,14 +54,15 @@ def create_router(manager: LoginManager):
         })
 
     @router.post("/login")
-    def login(data: OAuth2PasswordRequestForm = Depends()):
+    def login(request: Request, data: OAuth2PasswordRequestForm = Depends()):
         email = data.username
         password = data.password
 
         validated_user = user.validate_user(email, password)
 
-        if user is None:
-            raise InvalidCredentialsException
+        if validated_user is None:
+            flash(request, "Invalid email or password", "danger")
+            raise NotAuthenticatedException
         else:
             access_token = manager.create_access_token(
                 data={"sub": validated_user.userID}

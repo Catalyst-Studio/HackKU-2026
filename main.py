@@ -4,12 +4,15 @@ from fastapi.staticfiles import StaticFiles
 from fastapi_login import LoginManager
 from datetime import timedelta
 
+from starlette.middleware.sessions import SessionMiddleware
+
 import router
 import user
 from os import getenv, environ
 from exceptions import NotAuthenticatedException
 
 app = FastAPI()
+app.add_middleware(SessionMiddleware, secret_key=environ["secret"])
 manager = LoginManager(environ["secret"], token_url="/login", use_cookie=True, default_expiry=timedelta(days=5), use_header=False, not_authenticated_exception=NotAuthenticatedException)
 manager.cookie_name = "GradePaceLogin"
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -23,4 +26,4 @@ def get_user(user_id: str):
 
 @app.exception_handler(NotAuthenticatedException)
 def auth_exception_handler(request: Request, exc: NotAuthenticatedException):
-    return RedirectResponse(url="/login")
+    return RedirectResponse(url="/login", status_code=303)

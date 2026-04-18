@@ -14,6 +14,8 @@ def get_user(user_id: str):
 
 def validate_user(email: str, password: str):
     user = database["Users"].find_one({"email": email})
+    if user is None:
+        return None
     encrypted_password = encrypt_password(password=password, salt_raw=user["salt"])
     if encrypted_password == user["password"]:
         return User(userID=user["userID"], name=user["name"], email=user["email"], start_of_week=user["start_of_week"], salt=user["salt"], password=user["password"])
