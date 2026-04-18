@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card">
+        <div class="card-header text-center"><h3 class="card-title">GradePace | Sign Up</h3> </div>
+        <div class="card-body">
+            <form class="specific-w-400 mw-100 p-20 m-auto needs-validation" novalidate>
+                <div class="input-group has-validation mb-3">
+                    <span class="input-group-text"><i class="iconoir-user"></i></span>
+                    <input type="text" class="form-control form-control-lg" id="name" required placeholder="Name" aria-label="Name">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please enter your name
+                    </div>
+                </div>
+                <div class="input-group has-validation mb-3">
+                    <span class="input-group-text"><i class="iconoir-mail"></i></span>
+                    <input type="email" class="form-control form-control-lg" id="email" required placeholder="Email address" aria-label="Email address">
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please enter a valid email address
+                    </div>
+                </div>
+                <div class="input-group has-validation mb-3">
+                    <span class="input-group-text"><i class="iconoir-lock"></i></span>
+                    <input type="password" class="form-control form-control-lg" id="password" required placeholder="Password" aria-label="Password" oninput="checkPassword()">
+                    <button type="button" class="btn btn-light btn-lg" onclick="togglePasswordVisibility()"><i class="iconoir-eye-closed" id="eye-icon"></i></button>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please enter a valid password
+                    </div>
+                </div>
+                <ul id="requirements-list" class="d-none">
+                    <li id="length" class="text-danger">At least 8 characters long</li>
+                    <li id="uppercase" class="text-danger">At least one uppercase letter</li>
+                    <li id="lowercase" class="text-danger">At least one lowercase letter</li>
+                    <li id="number" class="text-danger">At least one number</li>
+                    <li id="special" class="text-danger">At least one special character</li>
+                </ul>
+                <div class="input-group has-validation mb-3">
+                    <span class="input-group-text"><i class="iconoir-lock"></i></span>
+                    <input type="password" class="form-control form-control-lg" id="password-confirm" required placeholder="Confirm Password" aria-label=" Confirm Password" oninput="checkPassword()">
+                    <button type="button" class="btn btn-light btn-lg" onclick="togglePasswordVisibilityConfirm()"><i class="iconoir-eye-closed" id="eye-icon-confirm"></i></button>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Passwords must match
+                    </div>
+                </div>
+                <div class="d-flex align-items-center border-bottom mb-3 pb-3">
+                    <div class="form-check mb-0">
+                        <input type="checkbox" class="form-check-input" id="remember" value="">
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary ms-auto btn-lg">Sign in</button>
+                </div>
+                <div class="text-center text-body-secondary">
+                    Already have an account? <a href="./login">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="./static/password_visibility.js"></script>
+    <script src="./static/block_submission.js"></script>
+    <script src="./static/password_check.js"></script>
+{% endblock %}
