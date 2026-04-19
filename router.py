@@ -90,11 +90,16 @@ def create_router(manager: LoginManager):
             "Engineering",
             "Philosophy"
         ]
+        times = []
+        for hour in range(24):
+            for minute in range(0, 60, 15):
+                times.append(f"{hour:02d}:{minute:02d}")
         return templates.TemplateResponse(request, "home.html", {
             "request": request,
             "title": "Home",
             "user": current_user,
-            "subjects": subjects
+            "subjects": subjects,
+            "times": times
         })
 
     return router
