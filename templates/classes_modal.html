@@ -1,0 +1,45 @@
+<div class="modal fade" id="classes-modal" tabindex="-1" aria-labelledby="Classes Entry Form" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="classes-modal-title">Add a new class</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <div class="mb-3 d-flex">
+                        <div class="input-group m-2 w-75">
+                            <span class="input-group-text"><i class="iconoir-graduation-cap-solid"></i></span>
+                            <input type="text" class="form-control form-control-lg me-2" id="class-name" required placeholder="Class Name" aria-label="Class Name" name="class_name">
+                        </div>
+                        <div class="input-group m-2 w-25">
+                            <span class="input-group-text"><i class="iconoir-open-book"></i></span>
+                            <select class="form-select form-select-lg" id="class-subject" required aria-label="Subject" name="class_subject">
+                                <option selected disabled value="">Subject</option>
+                                {% for subject in subjects %}
+                                    <option value="{{ subject }}" >{{ subject }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-flex">
+                        <div class="input-group m-2 w-75">
+                            <span class="input-group-text"><i class="iconoir-user"></i></span>
+                            <input type="text" class="form-control form-control-lg me-2" id="class-teacher" required placeholder="Teacher" aria-label="Teacher" name="class_teacher">
+                        </div>
+                        <div class="input-group m-2 w-25">
+                            <span class="input-group-text"><i class="iconoir-flash"></i></span>
+                            <select class="form-select form-select-lg" id="class-difficulty" required aria-label="Difficulty" name="class_difficulty">
+                                <option selected disabled value="">Difficulty</option>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg icon-link float-end m-2">Add <i class="iconoir-plus fs-4"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
