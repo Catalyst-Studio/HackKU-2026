@@ -74,10 +74,27 @@ def create_router(manager: LoginManager):
 
     @router.get("/home")
     async def home(request: Request, current_user: user.User = Depends(manager)):
+        subjects = [
+            "Math",
+            "English",
+            "Science",
+            "History",
+            "Social Studies",
+            "Foreign Language",
+            "Technology",
+            "Arts",
+            "Music",
+            "Physical Education",
+            "Health",
+            "Business",
+            "Engineering",
+            "Philosophy"
+        ]
         return templates.TemplateResponse(request, "home.html", {
             "request": request,
             "title": "Home",
-            "user": current_user
+            "user": current_user,
+            "subjects": subjects
         })
 
     return router
