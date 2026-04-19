@@ -1,8 +1,10 @@
 const passwordInput = document.getElementById("password");
 const requirementsList = document.getElementById("requirements-list");
 
-passwordInput.onfocus = () => { requirementsList.classList.remove("d-none"); };
-passwordInput.onblur = () => { requirementsList.classList.add("d-none"); };
+if (passwordInput) {
+    passwordInput.onfocus = () => { requirementsList.classList.remove("d-none"); };
+    passwordInput.onblur = () => { requirementsList.classList.add("d-none"); };
+}
 
 function checkPassword() {
     const passwordInput = document.getElementById('password');
