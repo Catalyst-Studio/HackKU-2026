@@ -2,14 +2,43 @@ import base64
 import hashlib
 import uuid
 from os import urandom
+
+from assignment import Assignment
+from assignment_type import AssignmentType
+from class_ import Class
 from crud import database
 import bcrypt
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+from homework_time import HomeworkTime
+from past_assignment import PastAssignment
 
 
 def get_user(user_id: str):
     user = database["Users"].find_one({"userID": user_id})
-    return User(userID=user["userID"], name=user["name"], email=user["email"], start_of_week=user["start_of_week"], salt=user["salt"], password=user["password"])
+    assignment_types = database["AssignmentTypes"].find({"userID": user_id})
+    assignments = database["Assignments"].find({"userID": user_id})
+    classes = database["Classes"].find({"userID": user_id})
+    homework_times = database["HomeworkTimes"].find_one({"userID": user_id})
+    past_assignments = database["PastAssignments"].find({"userID": user_id})
+    assignment_types = [AssignmentType(**doc) for doc in assignment_types]
+    assignments = [Assignment(**doc) for doc in assignments]
+    classes = [Class(**doc) for doc in classes]
+    homework_times = HomeworkTime(**homework_times)
+    past_assignments = [PastAssignment(**doc) for doc in past_assignments ]
+    return User(
+        userID=user["userID"],
+        name=user["name"],
+        email=user["email"],
+        start_of_week=user["start_of_week"],
+        salt=user["salt"],
+        password=user["password"],
+        assignment_types=assignment_types,
+        assignments=assignments,
+        classes=classes,
+        homework_times=homework_times,
+        past_assignments=past_assignments
+    )
 
 
 def validate_user(email: str, password: str):
@@ -56,3 +85,21 @@ class User(BaseModel):
     salt: str
     start_of_week: str
     email: str
+
+    assignment_types: list[AssignmentType] | None = Field(exclude=True, default=None)
+    assignments: list[Assignment] | None = Field(exclude=True, default=None)
+    classes: list[Class] | None = Field(exclude=True, default=None)
+    homework_times: HomeworkTime | None = Field(exclude=True, default=None)
+    past_assignments: list[PastAssignment] | None = Field(exclude=True, default=None)
+
+    def store_class(self, class_: Class):
+        database["Classes"].insert_one(class_.model_dump())
+
+    def store_assignment_type(self, assignment_type: AssignmentType):
+        database["AssignmentTypes"].insert_one(assignment_type.model_dump())
+
+    def store_homework_time(self, homework_times: HomeworkTime):
+        database["HomeworkTimes"].insert_one(homework_times.model_dump())
+
+    def store_assignment(self, assignment: Assignment):
+        database["Assignments"].insert_one(assignment.model_dump())

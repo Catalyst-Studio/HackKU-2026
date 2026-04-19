@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import assignment_type
 
 
-class PastAssignments(BaseModel):
+class PastAssignment(BaseModel):
     userID: str
     class1: class1.Class
     type: assignment_type.AssignmentType

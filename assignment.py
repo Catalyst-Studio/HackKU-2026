@@ -5,7 +5,7 @@ import class_
 
 class Assignment(BaseModel):
     userID: str
-    class1: class_.Class
+    class_: class_.Class
     type: assignment_type.AssignmentType
     length: int
     name: str
