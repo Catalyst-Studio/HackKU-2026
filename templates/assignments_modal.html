@@ -1,0 +1,59 @@
+<div class="modal fade" id="assignments-modal" tabindex="-1" aria-labelledby="Assignments Entry Form" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="assignments-modal-title">Add a new assignment</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <div class="d-flex">
+                        <div class="input-group m-2 w-50">
+                            <span class="input-group-text"><i class="iconoir-book"></i></span>
+                            <input type="text" class="form-control form-control-lg" id="assignment-name" required placeholder="Assignment Name" aria-label="Assignment Name" name="assignment_name">
+                        </div>
+                        <div class="input-group m-2 w-50">
+                            <span class="input-group-text"><i class="iconoir-graduation-cap-solid"></i></span>
+                            <select class="form-select form-select-lg" id="assignment-select-class" required aria-label="Select class" name="assignment_class">
+                                <option disabled selected value="">Select class</option>
+                                <option value="history">History</option>
+                            </select>
+                        </div> <button onclick="addClass()" type="button" class="btn btn-success mt-2 mb-2"><i class="iconoir-plus"></i></button>
+                    </div>
+                    <div class="d-flex">
+                        <div class="input-group m-2 w-75">
+                            <span class="input-group-text"><i class="iconoir-calendar"></i></span>
+                            <input type="text" class="form-control form-control-lg" id="assignment-due-date" required placeholder="Due Date" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" aria-label="Due Date" name="assignment_due_date">
+                        </div>
+                        <div class="input-group m-2 w-25">
+                            <span class="input-group-text"><i class="iconoir-flash"></i></span>
+                            <select class="form-select form-select-lg" id="class-difficulty" required aria-label="Difficulty" name="assignment_difficulty">
+                                <option selected disabled value="">Difficulty</option>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex w-50">
+                            <div class="input-group m-2 w-100">
+                                <span class="input-group-text"><i class="iconoir-book-stack"></i></span>
+                                <select class="form-select form-select-lg" onchange="changeLength(this)" id="assignment-select-type" required aria-label="Select type" name="assignment_type">
+                                    <option disabled selected value="">Select type</option>
+                                    <option value="quiz">Quiz</option>
+                                </select>
+                            </div>
+                            <button id="assignment-type-add-popover-button" type="button" class="btn btn-success mb-2 mt-2"><i class="iconoir-plus"></i></button>
+                        </div>
+                        <div class="input-group w-25">
+                            <span class="input-group-text mt-2 mb-2"><i class="iconoir-hourglass"></i></span>
+                            <input type="text" class="form-control form-control-lg mt-2 mb-2" id="assignment-length" required placeholder="# of questions" aria-label="Assignment Length" name="assignment_length">
+                        </div>
+                    </div>
+                    <button onclick="addNewAssignment()" type="submit" class="btn btn-primary btn-lg icon-link float-end m-2">Add <i class="iconoir-plus fs-4"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
