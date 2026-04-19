@@ -1,7 +1,8 @@
-// window.addEventListener('load', (event) => {
-//     let modal = bootstrap.Modal.getOrCreateInstance("#homework-availability-modal");
-//     modal.show();
-// });
+let modal;
+window.addEventListener('load', (event) => {
+    modal = bootstrap.Modal.getOrCreateInstance("#homework-availability-modal");
+    modal.show();
+});
 
 function addTimeAvailability(elem) {
     let div = document.createElement("div");

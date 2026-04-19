@@ -1,5 +1,3 @@
-let classesModal = bootstrap.Modal.getOrCreateInstance("#classes-modal");
-classesModal.show();
 async function handleFormSubmit(event) {
   event.preventDefault(); // Prevent default page reload
 

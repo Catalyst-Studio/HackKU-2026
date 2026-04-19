@@ -1,3 +1,7 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="assignments-modal">
+  Add assignment
+</button>
+
 <div class="modal fade" id="assignments-modal" tabindex="-1" aria-labelledby="Assignments Entry Form" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -6,7 +10,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="needs-validation" novalidate>
+                <form id="assignment-form" class="needs-validation" method="post" action="/api/assignments" novalidate>
                     <div class="d-flex">
                         <div class="input-group m-2 w-50">
                             <span class="input-group-text"><i class="iconoir-book"></i></span>
@@ -51,7 +55,7 @@
                             <input type="text" class="form-control form-control-lg mt-2 mb-2" id="assignment-length" required placeholder="# of questions" aria-label="Assignment Length" name="assignment_length">
                         </div>
                     </div>
-                    <button onclick="addNewAssignment()" type="submit" class="btn btn-primary btn-lg icon-link float-end m-2">Add <i class="iconoir-plus fs-4"></i></button>
+                    <button type="submit" class="btn btn-primary btn-lg icon-link float-end m-2">Add <i class="iconoir-plus fs-4"></i></button>
                 </form>
             </div>
         </div>

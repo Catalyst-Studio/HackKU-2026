@@ -1,9 +1,4 @@
-let assignmentsModal;
-// window.addEventListener('load', (event) => {
-//     assignmentsModal = bootstrap.Modal.getOrCreateInstance("#assignments-modal");
-//     assignmentsModal.show();
-// });
-
+let assignmentsModal = bootstrap.Modal.getOrCreateInstance("#assignments-modal");
 function addClass() {
     let classesModal = bootstrap.Modal.getOrCreateInstance("#classes-modal");
     assignmentsModal.hide();
@@ -18,11 +13,6 @@ function addClass() {
     }
 }
 
-function addNewAssignment() {
-    assignmentsModal.hide();
-    //add to server
-}
-
 function changeLength(elem) {
     let baseType;
     let hasSetTime;
@@ -35,4 +25,43 @@ function changeLength(elem) {
     } else if (baseType === "Essay") {
         lengthText.placeholder = "# of pages"
     }
+}
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    try {
+        const response = await fetch(form.action, {
+            method: form.method || "POST",
+            body: formData
+        });
+        const data = await response.json();
+        if (response.ok) {
+            onSuccess(data);
+        } else {
+            onError(response.status, data);
+        }
+    } catch (err) {
+        onNetworkError(err);
+    }
+}
+
+document.getElementById("assignment-form").addEventListener("submit", handleFormSubmit);
+
+function onSuccess(data) {
+  console.log("Success:", data);
+  // e.g. redirect, show a success message, update the UI
+}
+
+function onError(status, data) {
+  console.error(`Error ${status}:`, data);
+  // e.g. show validation errors, highlight fields, display a toast
+}
+
+function onNetworkError(err) {
+  console.error("Network error:", err);
+  // e.g. show a "check your connection" message
 }
