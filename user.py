@@ -19,7 +19,7 @@ def get_user(user_id: str):
     assignment_types = database["AssignmentTypes"].find({"userID": user_id})
     assignments = database["Assignments"].find({"userID": user_id})
     classes = database["Classes"].find({"userID": user_id})
-    homework_times = database["HomeworkTimes"].find_one({"userID": user_id})
+    homework_times = database["HomeworkTimes"].find({"userID": user_id})
     past_assignments = database["PastAssignments"].find({"userID": user_id})
     assignment_types = [AssignmentType(**doc) for doc in assignment_types]
     assignments = [Assignment(**doc) for doc in assignments]
