@@ -4,7 +4,7 @@ new bootstrap.Popover(button, {
     html: true,
     content: formContent,
     sanitize: false,
-    container: "body",
+    container: "#assignments-modal",
     direction: "right",
     title: "Add Assignment Type",
 });
