@@ -1,0 +1,47 @@
+<div class="modal fade" id="assignments-display-modal" tabindex="-1" aria-labelledby="Assignment Display" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="assignment-name">Assignment Name</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex">
+                    <div class="fs-4 w-50">
+                        <div class="d-flex">
+                            <b id="assignment-subject" aria-label="Assignment Subject">Class: </b>
+                            <p class="ms-2">class</p>
+                        </div>
+                        <div class="d-flex">
+                            <b id="assignment-due-date" aria-label="Assignment Due Date">Due: </b>
+                            <p class="ms-2">due date</p>
+                        </div>
+                        <div class="d-flex">
+                            <b id="assignment-difficulty" aria-label="Assignment Difficulty">Difficulty: </b>
+                            <p class="ms-2">difficulty</p>
+                        </div>
+                        <div class="d-flex">
+                            <b id="assignment-type" aria-label="Assignment Type">Type: </b>
+                            <p class="ms-2">type</p>
+                        </div>
+                        <div class="d-flex">
+                            <b id="assignment-length" aria-label="Assignment Length">Length: </b>
+                            <p class="ms-2">length</p>
+                        </div>
+                    </div>
+                    <div class="fs-3 w-50 mt-5 text-center">
+                        <b id="assignment-stopwatch" aria-label="Assignment Stopwatch">00:00:00.000</b>
+                        <div class="d-flex justify-content-center">
+                            <button id="startStopwatchButton" type="button" class="btn btn-success m-3 btn-lg" onclick="startAssignment()">Start</button>
+                            <button id="stopStopwatchButton" type="button" class="btn btn-danger m-3 btn-lg" onclick="stopAssignment()">Stop</button>
+                            <button id="resetStopwatchButton" type="button" class="btn btn-warning m-3 btn-lg" onclick="resetAssignment()">Reset</button>
+                        </div>
+                        <div>
+                            <button id="finishStopwatchButton" type="button" class="btn btn-info m-3 btn-lg w-75" onclick="finishAssignment()">Finished!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
