@@ -11,7 +11,7 @@
         <h1 class="modal-title fs-5" id="homework-availability-modal-1">Onboarding</h1>
       </div>
       <div class="modal-body">
-        <form class="needs-validation" novalidate>
+        <form id="homework-availability-form" method="post" action="/api/homework_times" class="needs-validation" novalidate>
             <div class="input-group has-validation mb-3">
                 <span class="input-group-text"><i class="iconoir-calendar"></i></span>
                 <select class="form-select" id="select-1" required aria-label="Recommended start of week">
@@ -89,7 +89,7 @@
               </div>
           </div>
         <div class="modal-footer">
-            <button onclick="addHomeworkAvailabilityTimes()" type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </form>
       </div>

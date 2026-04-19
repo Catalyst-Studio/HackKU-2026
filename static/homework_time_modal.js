@@ -1,6 +1,5 @@
-let modal;
+let modal = bootstrap.Modal.getOrCreateInstance("#homework-availability-modal");
 window.addEventListener('load', (event) => {
-    modal = bootstrap.Modal.getOrCreateInstance("#homework-availability-modal");
     modal.show();
 });
 
@@ -58,9 +57,47 @@ function checkTime(elem) {
     }
 }
 
-function addHomeworkAvailabilityTimes() {
-    if (document.querySelector("form").isValid) {
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    if (document.getElementById("homework-availability-form").checkValidity()) {
         modal.hide();
-        //add to server
+      const form = event.target;
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method || "POST",
+          body: formData,
+        });
+
+        const data = await response.json(); // Parse JSON response
+
+        if (response.ok) {
+          onSuccess(data);
+        } else {
+          onError(response.status, data);
+        }
+
+      } catch (err) {
+        onNetworkError(err);
+      }
     }
 }
+
+function onSuccess(data) {
+  console.log("Success:", data);
+  // e.g. redirect, show a success message, update the UI
+}
+
+function onError(status, data) {
+  console.error(`Error ${status}:`, data);
+  // e.g. show validation errors, highlight fields, display a toast
+}
+
+function onNetworkError(err) {
+  console.error("Network error:", err);
+  // e.g. show a "check your connection" message
+}
+
+// Attach to your form
+document.getElementById("homework-availability-form").addEventListener("submit", handleFormSubmit);
