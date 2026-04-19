@@ -1,6 +1,6 @@
 let modal = bootstrap.Modal.getOrCreateInstance("#homework-availability-modal");
 window.addEventListener('load', (event) => {
-    modal.show();
+    //modal.show();
 });
 
 function addTimeAvailability(elem) {

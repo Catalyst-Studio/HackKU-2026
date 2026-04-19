@@ -1,5 +1,5 @@
-let assignmentsModal = bootstrap.Modal.getOrCreateInstance("#assignments-modal");
 function addClass() {
+    let assignmentsModal = bootstrap.Modal.getOrCreateInstance("#assignments-modal");
     let classesModal = bootstrap.Modal.getOrCreateInstance("#classes-modal");
     assignmentsModal.hide();
     classesModal.show();
@@ -7,7 +7,6 @@ function addClass() {
         classesModal.hide();
         assignmentsModal.show();
     }; document.getElementById("classes-modal-submit").onclick = function() {
-        addClassToServer();
         classesModal.hide();
         assignmentsModal.show();
     }

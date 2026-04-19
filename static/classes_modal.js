@@ -1,25 +1,38 @@
+function updateSubmitAction() {
+  let classesModal = bootstrap.Modal.getOrCreateInstance("#classes-modal");
+  let assignmentsModal = bootstrap.Modal.getOrCreateInstance("#assignments-modal");
+  document.getElementById("classes-modal-submit").onclick = function() {
+        bootstrap.Modal.getOrCreateInstance("#classes-modal").show();
+        bootstrap.Modal.getOrCreateInstance("#assignments-modal").hide();
+  }; document.getElementById("classes-modal-btn-close").onclick = function() {
+        classesModal.show();
+        assignmentsModal.hide();
+  };
+}
+
 async function handleFormSubmit(event) {
   event.preventDefault(); // Prevent default page reload
-
   const form = event.target;
-  const formData = new FormData(form);
+  if (form.checkValidity()) {
+    const formData = new FormData(form);
 
-  try {
-    const response = await fetch(form.action, {
-      method: form.method || "POST",
-      body: formData,
-    });
+    try {
+      const response = await fetch(form.action, {
+        method: form.method || "POST",
+        body: formData,
+      });
 
-    const data = await response.json(); // Parse JSON response
+      const data = await response.json(); // Parse JSON response
 
-    if (response.ok) {
-      onSuccess(data);
-    } else {
-      onError(response.status, data);
+      if (response.ok) {
+        onSuccess(data);
+      } else {
+        onError(response.status, data);
+      }
+
+    } catch (err) {
+      onNetworkError(err);
     }
-
-  } catch (err) {
-    onNetworkError(err);
   }
 }
 
