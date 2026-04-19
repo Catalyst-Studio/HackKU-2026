@@ -24,7 +24,7 @@ def get_user(user_id: str):
     assignment_types = [AssignmentType(**doc) for doc in assignment_types]
     assignments = [Assignment(**doc) for doc in assignments]
     classes = [Class(**doc) for doc in classes]
-    homework_times = HomeworkTime(**homework_times)
+    homework_times = [HomeworkTime(**doc) for doc in homework_times]
     past_assignments = [PastAssignment(**doc) for doc in past_assignments ]
     return User(
         userID=user["userID"],
@@ -47,7 +47,7 @@ def validate_user(email: str, password: str):
         return None
     encrypted_password = encrypt_password(password=password, salt_raw=user["salt"])
     if encrypted_password == user["password"]:
-        return User(userID=user["userID"], name=user["name"], email=user["email"], start_of_week=user["start_of_week"], salt=user["salt"], password=user["password"])
+        return get_user(user_id=user["userID"])
     else:
         return None
 
@@ -89,7 +89,7 @@ class User(BaseModel):
     assignment_types: list[AssignmentType] | None = Field(exclude=True, default=None)
     assignments: list[Assignment] | None = Field(exclude=True, default=None)
     classes: list[Class] | None = Field(exclude=True, default=None)
-    homework_times: HomeworkTime | None = Field(exclude=True, default=None)
+    homework_times: list[HomeworkTime] | None = Field(exclude=True, default=None)
     past_assignments: list[PastAssignment] | None = Field(exclude=True, default=None)
 
     def store_class(self, class_: Class):
